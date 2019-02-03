@@ -1,0 +1,866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=1024px">
+    
+    <!-- must be included before any call to include -->
+    <script type="text/javascript" src="Prebivlastvo_files/modules.js"></script>
+    
+    <script type="text/javascript">
+       include("js/jquery/jquery-1.4.2.js");
+       include("js/jquery/jquery-ui-1.8.2.custom.js");
+       include("js/jquery/jquery.ba-bbq.js");
+       include("js/jquery/jquery.keystrokes.js");
+       include("js/jquery/jquery.json-2.2.js");
+       include("js/jquery/jquery.tools.js");
+       include("js/jquery/jquery.flip.js");
+       include("js/jslibs/flashSupport.js");
+       include("js/core/jquery-eplx.js");
+       include("js/core/methodsextra.js");
+       include("js/core/debug.js");
+       include("js/core/events.js");
+       include("js/core/flash.js");
+       include("js/core/random.js");
+       include("js/core/util.js");
+       include("js/core/elementbase.js");
+       include("js/app/flags.js");
+       include("js/app/variables.js");
+       include("js/app/slides.js");
+       include("js/app/popups.js");
+       include("js/app/presentation.js");
+       include("js/app/application.js");
+       include("js/app/dynamicattrs.js");
+       include("js/app/score.js");
+       include("js/elements/teacher.js");
+       include("js/scorm/scorm.js");
+       include("js/elements/table.js");
+    </script><script type="text/javascript" src="Prebivlastvo_files/jquery-1.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery-ui-1.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery_003.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery_005.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery_002.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery_006.js"></script><script type="text/javascript" src="Prebivlastvo_files/flashSupport.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery-eplx.js"></script><script type="text/javascript" src="Prebivlastvo_files/jslayout-utils.js"></script><script type="text/javascript" src="Prebivlastvo_files/methodsextra.js"></script><script type="text/javascript" src="Prebivlastvo_files/debug.js"></script><script type="text/javascript" src="Prebivlastvo_files/events.js"></script><script type="text/javascript" src="Prebivlastvo_files/flash.js"></script><script type="text/javascript" src="Prebivlastvo_files/base64.js"></script><script type="text/javascript" src="Prebivlastvo_files/random.js"></script><script type="text/javascript" src="Prebivlastvo_files/util.js"></script><script type="text/javascript" src="Prebivlastvo_files/elementbase.js"></script><script type="text/javascript" src="Prebivlastvo_files/flags.js"></script><script type="text/javascript" src="Prebivlastvo_files/variables.js"></script><script type="text/javascript" src="Prebivlastvo_files/slides.js"></script><script type="text/javascript" src="Prebivlastvo_files/jquery_004.js"></script><script type="text/javascript" src="Prebivlastvo_files/browserversion.js"></script><script type="text/javascript" src="Prebivlastvo_files/popups.js"></script><script type="text/javascript" src="Prebivlastvo_files/presentation.js"></script><script type="text/javascript" src="Prebivlastvo_files/application.js"></script><script type="text/javascript" src="Prebivlastvo_files/comments.js"></script><script type="text/javascript" src="Prebivlastvo_files/dynamicattrs.js"></script><script type="text/javascript" src="Prebivlastvo_files/score.js"></script><script type="text/javascript" src="Prebivlastvo_files/teacher.js"></script><script type="text/javascript" src="Prebivlastvo_files/scorm.js"></script><script type="text/javascript" src="Prebivlastvo_files/table.js"></script>
+
+    <script type="text/javascript">
+       
+    // core modules
+    var Util = require('Util');
+    var Debug = require('Debug');
+    var Random = require('Random');
+    var ElementBase = require('ElementBase');
+    
+    // add methods to objects
+    require('JQueryExtra');                 // adds methods to JQuery
+    require('MethodsExtra');                // adds methods to Math and String
+    
+    // main application modules
+    var Variables = require('Variables'); 
+    var Slides = require('Slides');
+    var Popups = require('Popups');
+    var Presentation = require('Presentation');
+    var DynamicAttrs = require('DynamicAttrs');
+    var Score = require('Score');
+    var Events = require('Events');
+    
+    // shortcuts 
+    var trace = Debug.trace;
+    
+    // eplx element modules
+    var Teacher = require('elements.Teacher');
+    var Flags = require('Flags'); 
+var TableElement = require("elements.Table");
+    </script>
+    
+    <title>Naloga: Prebivalstvo [Excel - Vaja 1]</title>
+
+    <link rel="stylesheet" href="Prebivlastvo_files/eplxstyle.css" type="text/css">
+
+    <script type="text/javascript">
+       (function () {
+          var urldata = jQuery.url.parse(window.location.href);
+          if ( urldata.params && urldata.params['printSlides'] ) {
+              document.write('<link rel="stylesheet" href="stylesheets/print.css" type="text/css" />');
+          }
+          else {
+              document.write('<link rel="stylesheet" href="stylesheets/screen.css" type="text/css" />');
+              document.write('<!--[if lt IE 8]><link rel="stylesheet" href="stylesheets/ie.css" type="text/css"><![endif]-->');
+              document.write('<!--[if lt IE 7]><link rel="stylesheet" href="stylesheets/ie6.css" type="text/css"><![endif]-->');
+              document.write('<link rel="stylesheet" href="style-specific/screen.css" type="text/css" />');
+          }
+       })();
+    </script><link rel="stylesheet" href="Prebivlastvo_files/screen.css" type="text/css"><!--[if lt IE 8]><link rel="stylesheet" href="stylesheets/ie.css" type="text/css"><![endif]--><!--[if lt IE 7]><link rel="stylesheet" href="stylesheets/ie6.css" type="text/css"><![endif]--><link rel="stylesheet" href="Prebivlastvo_files/screen_002.css" type="text/css">
+
+    <script type="text/javascript">
+    // <!--
+    
+    Slides.addSlide({'namespace': '', 'type': 'slide', 'name': 'titleslide', 'id': '_titleslide_1419771562'});
+Slides.addSlide({'name': '0', 'title': 'Kazalo', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1068462242'});
+Slides.addSlide({'name': '1', 'title': 'Naloga: Prebivalstvo', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1589085098'});
+Slides.addSlide({'name': '2', 'title': 'Naloga: Listi', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1033465650'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2a', 'id': '_slide_1918377100'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2b', 'id': '_slide_1658139920'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2c', 'id': '_slide_1211413262'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2d', 'id': '_slide_1922341450'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2e', 'id': '_slide_1524246592'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2f', 'id': '_slide_1787819065'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2g', 'id': '_slide_1017550716'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '2h', 'id': '_slide_1985602274'});
+Slides.addSlide({'name': '3', 'title': 'Naloga: Sladoled', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1802055612'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '3a', 'id': '_slide_1056073690'});
+Slides.addSlide({'name': '4', 'title': 'Naloga: Honorar', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1916001088'});
+Slides.addSlide({'name': '5', 'title': 'Naloga: Ocene', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1483962152'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '5a', 'id': '_slide_1274508695'});
+Slides.addSlide({'name': '6', 'title': 'Naloga: Kolokviji', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1884105614'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '6a', 'id': '_slide_1790802335'});
+Slides.addSlide({'name': '7', 'title': 'Naloga: Temperature', 'navigation': '', 'namespace': '', 'type': 'slide', 'id': '_slide_1821082076'});
+Slides.addSlide({'namespace': '', 'type': 'popup', 'name': '7a', 'id': '_slide_1362412362'});
+Slides.addSlide({'namespace': '', 'type': 'slide', 'name': 'endslide', 'id': '_endslide_1353837470'});
+Flags.setMetadata({'license': 'CC BY-NC-SA', 'classification': [['Računalništvo', 'Srednja šola', 'Obdelava podatkov', 'Preglednica']], 'description': 'Vaja 1\n\n', 'language': 'SL', 'author': ['Matjaž Zaveršnik'], 'url': 'http://www.nauk.si/materials/114/out/', 'title': 'Excel - Vaja 1', 'project': 'lastno gradivo', 'difficulty': '', 'host': 'http://www.nauk.si', 'keyword': ['excel', 'vaje', 'naloge'], 'reviewer': [], 'id': '114', 'resource_type': 'naloge', 'source': []});
+// BEGIN _slide_1068462242
+// END _slide_1068462242
+// BEGIN _slide_1589085098
+// END _slide_1589085098
+// BEGIN _slide_1033465650
+// END _slide_1033465650
+// BEGIN _slide_1918377100
+// END _slide_1918377100
+// BEGIN _slide_1658139920
+// END _slide_1658139920
+// BEGIN _slide_1211413262
+// END _slide_1211413262
+// BEGIN _slide_1922341450
+// END _slide_1922341450
+// BEGIN _slide_1524246592
+// END _slide_1524246592
+// BEGIN _slide_1787819065
+// END _slide_1787819065
+// BEGIN _slide_1017550716
+// END _slide_1017550716
+// BEGIN _slide_1985602274
+// END _slide_1985602274
+// BEGIN _slide_1802055612
+// END _slide_1802055612
+// BEGIN _slide_1056073690
+// END _slide_1056073690
+// BEGIN _slide_1916001088
+// END _slide_1916001088
+// BEGIN _slide_1483962152
+// END _slide_1483962152
+// BEGIN _slide_1274508695
+// END _slide_1274508695
+// BEGIN _slide_1884105614
+// END _slide_1884105614
+// BEGIN _slide_1790802335
+// END _slide_1790802335
+// BEGIN _slide_1821082076
+// END _slide_1821082076
+// BEGIN _slide_1362412362
+// END _slide_1362412362
+
+
+    // -->
+    </script>
+
+        <!-- jsMath support -->
+    <script type="text/javascript" src="Prebivlastvo_files/load.js"></script><script src="Prebivlastvo_files/jsMath-easy-load.js"></script><script src="Prebivlastvo_files/jsMath.js"></script>
+
+    <style type="text/css">
+        /* hide jsMath unprocessed content and warnings */
+        .math           { visibility: hidden; }
+        #jsMath_Warning { display: none }
+        #jsMath_button  { display: none !important}
+    </style>
+    
+<style type="text/css">#jsMath_test {font-size:200%}
+</style><style type="text/css">.math {font-family: serif; font-style: normal; font-weight: normal}
+.typeset {font-family: serif; font-style: normal; font-weight: normal; line-height: normal; text-indent: 0px; white-space: normal}
+.typeset .normal {font-family: serif; font-style: normal; font-weight: normal}
+div.typeset {text-align: center; margin: 1em 0px}
+span.typeset {text-align: left}
+.typeset span {text-align: left; border: 0px; margin: 0px; padding: 0px}
+a .typeset img, .typeset a img {border: 0px; border-bottom: 1px solid blue;}
+.typeset .size0 {font-size: 50%}
+.typeset .size1 {font-size: 60%}
+.typeset .size2 {font-size: 70%}
+.typeset .size3 {font-size: 85%}
+.typeset .size4 {font-size: 100%}
+.typeset .size5 {font-size: 120%}
+.typeset .size6 {font-size: 144%}
+.typeset .size7 {font-size: 173%}
+.typeset .size8 {font-size: 207%}
+.typeset .size9 {font-size: 249%}
+.typeset .cmr10 {font-family: jsMath-cmr10, serif}
+.typeset .cmbx10 {font-family: jsMath-cmbx10, jsMath-cmr10}
+.typeset .cmti10 {font-family: jsMath-cmti10, jsMath-cmr10}
+.typeset .cmmi10 {font-family: jsMath-cmmi10}
+.typeset .cmsy10 {font-family: jsMath-cmsy10}
+.typeset .cmex10 {font-family: jsMath-cmex10}
+.typeset .textit {font-family: serif; font-style: italic}
+.typeset .textbf {font-family: serif; font-weight: bold}
+.typeset .link {text-decoration: none}
+.typeset .error {font-size: 90%; font-style: italic; background-color: #FFFFCC; padding: 1px; border: 1px solid #CC0000}
+.typeset .blank {display: inline-block; overflow: hidden; border: 0px none; width: 0px; height: 0px}
+.typeset .spacer {display: inline-block}
+#jsMath_hiddenSpan {visibility: hidden; position: absolute; top: 0px; left: 0px; line-height: normal; text-indent: 0px}
+#jsMath_message {position: fixed; bottom: 1px; left: 2px; background-color: #E6E6E6; border: solid 1px #959595; margin: 0px; padding: 1px 8px; z-index: 102; color: black; font-size: small; width: auto}
+#jsMath_panel {position: fixed; bottom: 1.75em; right: 1.5em; padding: .8em 1.6em; background-color: #DDDDDD; border: outset 2px; z-index: 103; width: auto; color: black; font-size: 10pt; font-style: normal}
+#jsMath_panel .disabled {color: #888888}
+#jsMath_panel .infoLink {font-size: 85%}
+#jsMath_panel * {font-size: inherit; font-style: inherit; font-family: inherit; line-height: normal}
+#jsMath_panel div {background-color: inherit; color: inherit}
+#jsMath_panel span {background-color: inherit; color: inherit}
+#jsMath_panel td {border: 0px; padding: 0px; margin: 0px; background-color: inherit; color: inherit}
+#jsMath_panel tr {border: 0px; padding: 0px; margin: 0px; background-color: inherit; color: inherit}
+#jsMath_panel table {border: 0px; padding: 0px; margin: 0px; background-color: inherit; color: inherit; height: auto; width: auto}
+#jsMath_button {position: fixed; bottom: 1px; right: 2px; background-color: white; border: solid 1px #959595; margin: 0px; padding: 0px 3px 1px 3px; z-index: 102; color: black; text-decoration: none; font-size: x-small; width: auto; cursor: hand}
+#jsMath_button * {padding: 0px; border: 0px; margin: 0px; line-height: normal; font-size: inherit; font-style: inherit; font-family: inherit}
+#jsMath_global {font-style: italic}
+#jsMath_noFont .message {text-align: center; padding: .8em 1.6em; border: 3px solid #DD0000; background-color: #FFF8F8; color: #AA0000; font-size: small; width: auto}
+#jsMath_noFont .link {padding: 0px 5px 2px 5px; border: 2px outset; background-color: #E8E8E8; color: black; font-size: 80%; width: auto; cursor: hand}
+#jsMath_PrintWarning .message {text-align: center; padding: .8em 1.6em; border: 3px solid #DD0000; background-color: #FFF8F8; color: #AA0000; font-size: x-small; width: auto}
+@media print {#jsMath_button {display: none}
+#jsMath_Warning {display: none}
+}
+@media screen {#jsMath_PrintWarning {display: none}
+}
+.typeset .scale {font-size: 121%}
+</style><style type="text/css">.typeset .cmr10 {font-family: serif}
+.typeset .italic {font-style: italic}
+.typeset .bold {font-weight: bold}
+.typeset .lucida {font-family: 'lucida sans unicode'}
+.typeset .arial {font-family: 'Arial unicode MS'}
+.typeset .cal {font-family: 'Script MT', 'Script MT Bold', cursive}
+.typeset .arrows {font-family: 'Arial unicode MS'}
+.typeset .arrow1 {font-family: 'Arial unicode MS'}
+.typeset .arrow1a {font-family: 'Arial unicode MS'; position:relative; top:.05em;left:-.15em; margin-right:-.15em; display:inline-block}
+.typeset .arrow2 {font-family: 'Arial unicode MS'; position:relative; top:-.1em; display:inline-block;}
+.typeset .arrow3 {font-family: 'Arial unicode MS'; margin:.1em}
+.typeset .symbol {font-family: 'Arial unicode MS'}
+.typeset .symbol2 {font-family: 'Arial unicode MS'}
+.typeset .delim1 {font-family: 'Times New Roman'; font-size: 133%; position:relative; top:.7em; display:inline-block}
+.typeset .delim1a {font-family: 'Lucida sans unicode'; font-size: 133%; position:relative; top:.8em; display:inline-block}
+.typeset .delim1b {font-family: 'Arial unicode MS'; font-size: 133%; position:relative; top:.7em; display:inline-block}
+.typeset .delim2 {font-family: 'Times New Roman'; font-size: 180%; position:relative; top:.75em; display:inline-block}
+.typeset .delim2a {font-family: 'Lucida sans unicode'; font-size: 180%; position:relative; top:.8em; display:inline-block}
+.typeset .delim2b {font-family: 'Arial unicode MS'; font-size: 180%; position:relative; top:.7em; display:inline-block}
+.typeset .delim3 {font-family: 'Times New Roman'; font-size: 250%; position:relative; top:.725em; display:inline-block}
+.typeset .delim3a {font-family: 'Lucida sans unicode'; font-size: 250%; position:relative; top:.775em; display:inline-block}
+.typeset .delim3b {font-family: 'Arial unicode MS'; font-size: 250%; position:relative; top:.7em; display:inline-block}
+.typeset .delim4 {font-family: 'Times New Roman'; font-size: 325%; position:relative; top:.7em; display:inline-block}
+.typeset .delim4a {font-family: 'Lucida sans unicode'; font-size: 325%; position:relative; top:.775em; display:inline-block}
+.typeset .delim4b {font-family: 'Arial unicode MS'; font-size: 325%; position:relative; top:.7em; display:inline-block}
+.typeset .delimx {font-family: Symbol}
+.typeset .greek {font-family: 'Times New Roman'}
+.typeset .igreek {font-family: 'Times New Roman'; font-style:italic}
+.typeset .bgreek {font-family: 'Times New Roman'; font-weight:bold}
+.typeset .bigop1 {font-family: 'Arial unicode MS'; font-size: 130%; position: relative; top: .7em; margin:-.05em; display:inline-block}
+.typeset .bigop1a {font-family: 'Arial unicode MS'; font-size: 110%; position: relative; top: .85em; display:inline-block;}
+.typeset .bigop1b {font-family: 'Arial unicode MS'; font-size: 180%; position: relative; top: .6em; display:inline-block}
+.typeset .bigop1c {font-family: 'Arial unicode MS'; font-size: 85%; position: relative; top: 1em; display:inline-block}
+.typeset .bigop2 {font-family: 'Arial unicode MS'; font-size: 230%; position: relative; top: .6em; margin:-.05em; display:inline-block}
+.typeset .bigop2a {font-family: 'Arial unicode MS'; font-size: 185%; position: relative; top: .75em; display:inline-block}
+.typeset .bigop2b {font-family: 'Arial unicode MS'; font-size: 275%; position: relative; top: .55em; display:inline-block}
+.typeset .bigop2c {font-family: 'Arial unicode MS'; font-size: 185%; position: relative; top: 1em; margin-right:-.1em; display:inline-block}
+.typeset .wide1 {font-family: 'Arial unicode MS'; font-size: 67%; position: relative; top:-.75em; display:inline-block;}
+.typeset .wide2 {font-family: 'Arial unicode MS'; font-size: 110%; position: relative; top:-.4em; display:inline-block;}
+.typeset .wide3 {font-family: 'Arial unicode MS'; font-size: 175%; position: relative; top:-.25em; display:inline-block}
+.typeset .wide1a {font-family: 'Times New Roman'; font-size: 75%; position: relative; top:-.5em; display:inline-block}
+.typeset .wide2a {font-family: 'Times New Roman'; font-size: 133%; position: relative; top:-.2em; display:inline-block}
+.typeset .wide3a {font-family: 'Times New Roman'; font-size: 200%; position: relative; top:-.1em; display:inline-block}
+.typeset .root {font-family: 'Arial unicode MS'; margin-right:-.075em; display:inline-block}
+.typeset .accent {font-family: 'Arial unicode MS'; position:relative; top:.05em; left:.15em; display:inline-block}
+.typeset .iaccent {font-family: 'Arial unicode MS'; position:relative; top:.05em; left:.15em; font-style:italic; display:inline-block}
+.typeset .baccent {font-family: 'Arial unicode MS'; position:relative; top:.05em; left:.15em; font-weight:bold; display:inline-block}
+</style></head>
+
+<body class="w890 screen-style"><div id="jsMath_button" title=" Open jsMath Control Panel " style="width: auto;"><span onclick="jsMath.Controls.Panel()">jsMath</span></div><div id="jsMath_panel" style="display: none;"></div><div id="jsMath_Hidden" style="visibility: hidden; position: absolute; top: 0px; left: 0px; border: 0px none; padding: 0px; margin: 0px;"></div>
+    <div id="container" style="margin-top: 24px; margin-bottom: 24px; padding-top: 20px; padding-bottom: 20px; height: 842px;">
+      <div id="logo" class="fw-normal-slide-trimmings" style="display: block;">
+        <a target="_blank" href="http://www.nauk.si/"><img src="Prebivlastvo_files/logo.png" alt="Nauk.si"></a>
+      </div>
+      <h1 id="heading" class="fw-normal-slide-trimmings" style="display: block;">Excel - Vaja 1</h1>
+      
+      <noscript>
+         <h2>Sistem za prikazovanje nujno potrebuje vključen Javascript.</h2>
+      </noscript>
+
+      <div id="fw-oldBrowser" style="display: none">
+        <h2>Vaš brskalnik je zastarel</h2>
+        <p>Gradiva <b>nauk.si</b> zahtevajo za pravilen prikaz sodoben brskalnik. Preverjeno delujejo
+        z brskalniki Mozilla Firefox 3.5+, Google Chrome 4.0+, Safari 4.0+, Internet Explorer 8.0+ ali Opera 10.50+.</p>
+        <p>V primeru, da uporabljate Internet Explorer 8, preverite, če imate vklopljen združljivostni način 
+        (Compatibility view), ki ga lahko izklopite s klikom na ikono, ki jo vidite na spodnji sliki.</p>
+        <img src="Prebivlastvo_files/compatibility.png" alt="Internet Explorer 8 compatibility mode">
+        <p>Povezave na najnovejše različice brskalnikov:</p>
+        <ul>
+            <li><a href="http://www.getfirefox.net/">Mozilla Firefox</a></li>
+            <li><a href="http://www.google.com/chrome">Google Chrome</a></li>
+            <li><a href="http://www.microsoft.com/windows/internet-explorer/worldwide-sites.aspx">Internet Explorer</a></li>
+            <li><a href="http://www.opera.com/">Opera</a></li>
+            <li><a href="http://www.apple.com/safari/">Apple Safari</a></li>
+        </ul>
+        <p><button id="oldBrowserContinue" class="button-blue">Prikaži vsebino</button></p>
+      </div>
+            
+      <div id="fw_fullscreen_popup" class="eplxSlide popupImpl" style="display: none">
+        <div class="popupContent">
+            <div class="popupCloseWin close"></div>
+            <h1 style="text-align: center;">Pritisnite F11</h1>
+            <p>Iz varnostnih razlogov je mogoče celozaslonski način 
+            vključiti samo s pritiskom na gumb <b>F11</b> na tipkovnici.</p>
+            <p>Ko ste enkrat v celozaslonskem načinu, ga izključite spet s pritiskom na F11.</p>
+        </div>
+      </div>
+            
+      <div id="fw_help" class="eplxSlide popupImpl" style="display: none">
+        <div class="popupContent">
+           <div class="popupDragHandle"></div>
+           <div class="popupCloseWin close"></div>
+           <object codebase="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="730" height="500">
+              <param value="images/pomoc.swf" name="movie">
+              <param value="true" name="play">
+              <param value="false" name="loop">
+              <param value="transparent" name="wmode">
+              <param value="high" name="quality">
+              <embed pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" wmode="transparent" loop="false" quality="high" src="Prebivlastvo_files/pomoc.swf" width="730" height="500">
+           </object>
+        </div>
+      </div>
+      
+      <div id="_titleslide_1419771562" name="titleslide" class="eplxSlide eplxTitleslide" style="display: none;">
+   <div class="logo_hq">
+      <img src="Prebivlastvo_files/logo_hq.png" class="logohq">
+      <div class="logo_txt">
+         <h1>Excel - Vaja 1</h1>
+         <h2></h2>
+         <div style="margin-top:30px;margin-bottom:20px;">
+            <h3><span class="fw-meta-key">Avtor:</span> Matjaž Zaveršnik</h3>
+<h3><span class="fw-meta-key">Težavnost:</span> </h3>
+
+         </div>
+         <div style="margin-top: 2em;">
+            <button class="button-blue goToSlide" href="#_slide_1068462242">Začni</button>
+         </div>
+      </div>
+      <div class="fw-title-footer"><div class="fw-title-footer-lic"><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/2.5/si/"><img src="Prebivlastvo_files/cc-by-nc-sa-big.png"></a></div></div>
+   </div>
+</div>
+
+<div id="fw_project_popup" class="eplxSlide popupImpl" style="display: none">
+  <div class="popupContent">
+     <div class="popupDragHandle"></div>
+     <div class="popupCloseWin close"></div>
+                 
+  </div>
+</div>
+
+<div id="_endslide_1353837470" name="endslide" class="eplxSlide eplxTitleslide" style="display: none;">
+   <div class="logo_hq">
+      <img src="Prebivlastvo_files/logo_hq.png" class="logohq">
+      <div class="logo_txt">
+         <h1>Hvala za ogled gradiva!</h1>
+         <h3>Veseli bomo vaših komentarjev. Obiščite nas na <a href="http://www.nauk.si/" target="_blank">www.nauk.si</a>.</h3>
+         
+         <div style="margin-top:30px;">
+            <button class="button-blue restartPresentation">Začni znova</button>
+         </div>
+         
+         
+                  
+         <div style="margin-top:30px;">
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div id="_slide_1068462242" name="0" class="eplxSlide" style="display: none;">
+  <p class="subheading">Kazalo</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <ul class="slidemenuUL">
+    <li><a class="slidemenu goToSlide" href="#_slide_1589085098">Naloga: Prebivalstvo</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1033465650">Naloga: Listi</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1802055612">Naloga: Sladoled</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1916001088">Naloga: Honorar</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1483962152">Naloga: Ocene</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1884105614">Naloga: Kolokviji</a></li>
+    <li><a class="slidemenu goToSlide" href="#_slide_1821082076">Naloga: Temperature</a></li>
+</ul>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+
+<div id="_slide_1589085098" name="1" class="eplxSlide" style="display: block;">
+  <p class="subheading">Naloga: Prebivalstvo</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <table>
+    <tbody><tr><td><p>Odpri nov (prazen) delovni zvezek, nato pa po vrsti izvajaj korake na desni strani.<br>
+            </p>
+            <img id="image1266085831" src="Prebivlastvo_files/prebivalstvo.png" alt="(prebivalstvo.png)" style="width:364px;" title="">
+        </td><td></td><td><ol>
+                <li>V celice od B2 do B5 vpiši števila 20856, 789, 1996377 in 5,1%.</li>
+                <li>Število v celici B2 popravi v 20356.</li>
+                <li>Premakni vsebino celic B2:B5 v celice C3:C6.</li>
+                <li>V celico B3 vpiši besedilo "Površina", v celico B5 
+"Število prebivalcev", v celico B6 "Letni naravni prirastek" in v celico
+ B7 "Gostota prebivalstva". Celice v stolpcu B razširi tako, da bodo v 
+njem v vsaki vrstici vidna cela besedila.</li>
+                <li>Zbriši vrstico 4.</li>
+                <li>V celico B2 vpiši besedilo "Slovenija". Določi pisavo Times New Roman velikosti 16pt. Vrstici 2 določi višino 30.</li>
+                <li>Spoji celici B2 in C2 in besedilo centriraj vodoravno in navpično.</li>
+                <li>V celico C6 vpiši formulo, ki bo izračunala gostoto prebivalstva: =C4/C3. Celico oblikuj tako, da bo število decimalk enako 1.</li>
+                <li>Obrobi celice (razen naslovne): okoli debelejša črta, vmes tanke.</li>
+                <li>Zvezek shrani pod imenom prebivalstvo.xlsx.</li>
+            </ol>
+        </td></tr>
+</tbody></table>
+<p><a class="button-blue button  goToSlide " href="#_slide_1033465650">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+
+<div id="_slide_1033465650" name="2" class="eplxSlide">
+  <p class="subheading">Naloga: Listi</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>Odpri nov delovni zvezek in vstavi toliko novih delovnih listov,
+da jih bo vsega skupaj osem. Liste poimenuj Skladišče, Obresti, Barva, Padavine, Množenje, Kovine, Prebivalci in Ptice.
+Datoteko shrani pod imenom <b>listi.xlsx</b>. Na vsakem listu reši eno od naslednjih nalog. <br>
+</p>
+<img id="image1520496475" src="Prebivlastvo_files/listi.png" alt="(listi.png)" style="width:585px;" title="">
+<p><br>
+</p>
+<p>1. delovni list: <a class="button-gray show goToSlide" href="#_slide_1918377100">Skladišče</a> <br>
+</p>
+<p>2. delovni list: <a class="button-gray show goToSlide" href="#_slide_1658139920">Obresti</a><br>
+</p>
+<p>3. delovni list: <a class="button-gray show goToSlide" href="#_slide_1211413262">Barva</a><br>
+</p>
+<p>4. delovni list: <a class="button-gray show goToSlide" href="#_slide_1922341450">Padavine</a></p>
+<p>5. delovni list: <a class="button-gray show goToSlide" href="#_slide_1524246592">Množenje</a> <br>
+</p>
+<p>6. delovni list: <a class="button-gray show goToSlide" href="#_slide_1787819065">Kovine</a><br>
+</p>
+<p>7. delovni list: <a class="button-gray show goToSlide" href="#_slide_1017550716">Prebivalci</a><br>
+</p>
+<p>8. delovni list: <a class="button-gray show goToSlide" href="#_slide_1985602274">Ptice</a></p>
+<p><a class="button-blue button  goToSlide " href="#_slide_1589085098">Nazaj</a> <a class="button-blue button  goToSlide " href="#_slide_1802055612">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+<div id="_slide_1918377100" name="2a" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Skladišče</h1>
+        <p>Sestavi tabelo, kot je prikazana na sliki.
+        Datum pod naslovom naj bo trenutni datum (uporabi funkcijo TODAY).
+        Vrednosti v zadnjem stolpcu izračunaj s pomočjo ustreznih formul (uporabi množenje in funkcijo SUM).
+        Vsa realna števila zapiši na dve decimalni mesti in poravnaj desno z odmikom 1.</p>
+        <img id="image1059167916" src="Prebivlastvo_files/skladisce.png" alt="(skladisce.png)" style="width:363px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1658139920" name="2b" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Obresti</h1>
+        <p>Janez je našel hranilno knjižico svojega očeta z vezano 
+devizno vlogo. Zadnji vpis v knjižici je bil pripis obresti za leto 
+1972. Stanje je bilo tedaj 123.43 USD. Banka je vsako leto ob koncu leta
+ h glavnici prištela 4.75% obresti in dobljeni znesek zaokrožila na 
+stoti del USD.
+        Koliko denarja bo na knjižici ob koncu leta 2007? Zaokroževanje 
+opravi funkcija ROUND.</p>
+        <img id="image1782164964" src="Prebivlastvo_files/obresti.png" alt="(obresti.png)" style="width:219px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1211413262" name="2c" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Barva</h1>
+        <p>Sestavi tabelo, kot je prikazana na sliki. Vrednosti v drugem
+ stolpcu so številske, prikazane z ustrezno enoto in poravnane desno z 
+odmikom 1.
+        Površina in cena barve sta izračunani vrednosti (sestavi 
+ustrezni formuli).</p>
+        <img id="image1436361186" src="Prebivlastvo_files/barva.png" alt="(barva.png)" style="width:308px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1922341450" name="2d" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Padavine</h1>
+        <p>Sestavi tabeli s podatki o količini mesečnih padavin ločeno 
+za prvo in drugo polovico leta. V tretji tabeli sestavi formule za 
+posamezne količine. Vrednosti izpiši zaokroženo na najbližje celo 
+število. Nato v prvih dveh tabelah izračunaj mesečne deleže padavin 
+(sestavi formulo in jo skopiraj v ostale celice).
+        Na koncu sestavi diagram, kot je prikazan na sliki.</p>
+        <img id="image1201074055" src="Prebivlastvo_files/padavine.png" alt="(padavine.png)" style="width:602px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1524246592" name="2e" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Množenje</h1>
+        <p>Sestavi tablico množenja, kot je prikazano na sliki. V prvi 
+vrstici tabele je samo prva vrednost vpisana številka, vse ostale so 
+izračune s formulami, tako da se zaporedje povečuje za 1. Podobno velja 
+za prvi stolpec. Za izračun produktov sestavi eno samo formulo, ki jo 
+potem skopiraš v ostale celice.</p>
+        <img id="image1943814940" src="Prebivlastvo_files/mnozenje.png" alt="(mnozenje.png)" style="width:685px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1787819065" name="2f" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Kovine</h1>
+        <p>Sestavi tabelo, kot je prikazana na sliki in izdelaj diagram.
+ Števila oblikuj tako, da bodo izpisana na nič decimalnih mest s piko za
+ tisočicami.
+        Pazi, da bodo v legendi prikazane kemijske oznake kovin.</p>
+        <img id="image1257444833" src="Prebivlastvo_files/kovine.png" alt="(kovine.png)" style="width:500px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1017550716" name="2g" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Prebivalci</h1>
+        <p>Sestavi tabelo, kot je prikazana na sliki in izdelaj diagram.
+ V zadnji vrstici tabele izračunaj, koga je več (moških ali žensk). 
+Rezultat formule naj bo M ali Ž.</p>
+        <img id="image1280856152" src="Prebivlastvo_files/prebivalci.png" alt="(prebivalci.png)" style="width:670px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+<div id="_slide_1985602274" name="2h" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Ptice</h1>
+        <p>Sestavi tabelo, kot je prikazana na sliki in izdelaj diagram.
+ Sestavi formule za izračun števila vseh ptic, njihovih deležev, v 
+zadnji vrstici pa sestavi formulo, ki ugotovi, ali je vrsta ogrožena. 
+Vrsta je ogrožena, če je število ptic manjše od 100. Rezultat formule 
+naj bo da ali ne.</p>
+        <img id="image1818613780" src="Prebivlastvo_files/ptice.png" alt="(ptice.png)" style="width:558px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+
+<div id="_slide_1802055612" name="3" class="eplxSlide">
+  <p class="subheading">Naloga: Sladoled</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>V delovnem zvezku <a class="button-gray download" href="http://www.nauk.si/materials/114/out/sladoled.xlsx" type="application/octet-stream">sladoled.xlsx</a> so zbrani podatki o prodaji sladoleda.
+Oblikuj tabelo, kot je prikazano na <a class="button-gray show goToSlide" href="#_slide_1056073690">sliki</a> in izračunaj manjkajoče vrednosti (uporabi funkciji <b>SUM</b> in <b>AVERAGE</b>). Sestavi tudi oba diagrama.</p>
+<p><a class="button-blue button  goToSlide " href="#_slide_1033465650">Nazaj</a> <a class="button-blue button  goToSlide " href="#_slide_1916001088">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+<div id="_slide_1056073690" name="3a" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1></h1>
+        <img id="image1303772099" src="Prebivlastvo_files/sladoled.png" alt="(sladoled.png)" style="width:741px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+
+<div id="_slide_1916001088" name="4" class="eplxSlide">
+  <p class="subheading">Naloga: Honorar</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>V delovnem zvezku <a class="button-gray download" href="http://www.nauk.si/materials/114/out/honorar.xlsx" type="application/octet-stream">honorar.xlsx</a>
+ so vpisani podatki o obračunu avtorskih honorarjev pri reviji Presek. 
+Višina honorarja je odvisna od števila strani prispevka in vrednosti 
+točke. Če ima prispevek do 3 strani, je vsaka stran vredna 0,5 točke, 
+vsaka nadaljna stran pa je vredna samo še 0,3 točke. Oblikuj podatke, 
+kot je prikazano na primeru in izračunaj
+manjkajoče vrednosti (uporabi funkciji <b>IF</b> in <b>SUM</b>). Sestavi tudi grafikon, kot je prikazan na sliki.</p>
+<img id="image1876344031" src="Prebivlastvo_files/honorar.png" alt="(honorar.png)" style="width:720px;" title="">
+<p><a class="button-blue button  goToSlide " href="#_slide_1802055612">Nazaj</a> <a class="button-blue button  goToSlide " href="#_slide_1483962152">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+
+<div id="_slide_1483962152" name="5" class="eplxSlide">
+  <p class="subheading">Naloga: Ocene</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>Odpri delovni zvezek <a class="button-gray download" href="http://www.nauk.si/materials/114/out/ocene.xlsx" type="application/octet-stream">ocene.xlsx</a>.</p>
+<ul>
+    <li>Učence v prvi tabeli uredi po priimkih.</li>
+    <li>Oblikuj tabeli, kot je prikazano na sliki <a class="button-gray show goToSlide" href="#_slide_1274508695">Ocene</a>.</li>
+    <li>V prvi tabeli za vsakega učenca izračunaj njegov uspeh. Z eno formulo izračunaj oceno (uporabi funkcije <b>IF</b>, <b>MIN</b>, <b>ROUND</b> in <b>AVERAGE</b>), z drugo pa njegov opisni uspeh (uporabi funkcijo <b>INDEX</b>).
+ Če ima učenec kakšno negativno oceno, je tudi njegov uspeh negativen, 
+sicer pa uspeh dobimo kot zaokroženo povprečje njegovih ocen. Sestavi 
+samo formuli za prvega učenca, potem pa ju skopiraj po stolcih navzdol.</li>
+    <li>V drugi tabeli preštej, koliko je posameznih ocen pri posameznih predmetih in skupnem uspehu (uporabi funkcijo <b>COUNTIF</b>). Sestavi samo eno formulo in jo skopiraj po ostalih celicah.</li>
+    <li>Iz skupnega uspeha (zadnji stolpec druge tabele) sestavi tortni grafikon, kot je prikazan na spodnji sliki.</li>
+</ul>
+<p><a class="button-blue button  goToSlide " href="#_slide_1916001088">Nazaj</a> <a class="button-blue button  goToSlide " href="#_slide_1884105614">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+<div id="_slide_1274508695" name="5a" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1>Ocene</h1>
+        <img id="image1561789977" src="Prebivlastvo_files/ocene.png" alt="(ocene.png)" style="width:729px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+
+<div id="_slide_1884105614" name="6" class="eplxSlide">
+  <p class="subheading">Naloga: Kolokviji</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>Odpri delovni zvezek <a class="button-gray download" href="http://www.nauk.si/materials/114/out/kolokviji.xlsx" type="application/octet-stream">kolokviji.xlsx</a>.</p>
+<ul>
+    <li>Uredi študente po priimkih, tiste z enakimi priimki pa še po imenu.</li>
+    <li>Na pravo mesto vrini še podatke za dva študenta:<br>
+    </li>
+</ul>
+<table class="tableBorders">
+    <tbody><tr><td>Avsec</td><td>Tone</td><td>35</td><td>23</td><td>57</td><td>50</td><td>50</td></tr>
+    <tr><td>Drčar</td><td>Maja</td><td>58</td><td>77</td><td>93</td><td>90</td><td>95</td></tr>
+</tbody></table>
+<p><br>
+</p>
+<ul>
+    <li>Zamenjaj stolpca z imeni in priimki študentov.</li>
+    <li>Za vsakega študenta izračunaj skupno število točk:<br>
+         vsak kolokvij šteje 25%, domača naloga 15%, udeležba pa 10%.</li>
+    <li>Izračunaj tudi oceno:<br>
+         90-100 (10), 80-89 (9), 70-79 (8), 60-69 (7), 50-59 (6), 40-49 (5) ...</li>
+    <li>Za vsak kolokvij, nalogo in udeležbo izračunaj še povprečno število točk.</li>
+    <li>Preštej, koliko je študentov s posameznimi ocenami.</li>
+    <li>Oblikuj tabeli, kot je prikazano na <a class="button-gray show goToSlide" href="#_slide_1790802335">sliki</a>. Pri stolpcu z ocenami uporabi pogojno oblikovanje (negativne ocene naj bodo rdeče, pozitivne pa modre in krepke).</li>
+    <li>Sestavi grafikon, ki bo prikazoval število študentov s posameznimi ocenami. Najvišji stolpec naj bo svetlejši.</li>
+</ul>
+<p><a class="button-blue button  goToSlide " href="#_slide_1483962152">Nazaj</a> <a class="button-blue button  goToSlide " href="#_slide_1821082076">Naprej</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+<div id="_slide_1790802335" name="6a" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1></h1>
+        <img id="image1666264320" src="Prebivlastvo_files/kolokviji.png" alt="(kolokviji.png)" style="width:729px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+
+<div id="_slide_1821082076" name="7" class="eplxSlide">
+  <p class="subheading">Naloga: Temperature</p>
+
+  <div class="content" style="height: 757px;">
+      
+    <div class="interactive-area">
+        <p>V delovnem zvezku <a class="button-gray download" href="http://www.nauk.si/materials/114/out/temperature.xlsx" type="application/octet-stream">temperature.xlsx</a>
+ so zbrani podatki o mesečnih temperaturah za neko obdobje. Oblikuj 
+tabelo, kot je prikazano na sliki, in sestavi formule, ki bodo 
+izračunale manjkajoče vrednosti v zadnjem stolpcu.
+Nato sestavi še črtni diagram, kot je prikazan na <a class="button-gray show goToSlide" href="#_slide_1362412362">sliki</a>.</p>
+<p><a class="button-blue button  goToSlide " href="#_slide_1884105614">Nazaj</a> <a class="button-blue button  goToSlide " href="#+">Konec</a></p>
+
+        <div class="placeholder-for-subslides"></div>
+    </div>
+
+
+      <div style="clear: both"></div>
+  </div>
+  
+  <div class="navigation-buttons">
+      
+  </div>
+   
+  <div class="extra-buttons">
+      
+  </div>
+</div>
+
+<div id="_slide_1362412362" name="7a" class="eplxSlide popupImpl">
+    <div class="popupDragHandle"></div>
+    <div class="popupContent">
+        <h1></h1>
+        <img id="image1946573039" src="Prebivlastvo_files/temperature.png" alt="(temperature.png)" style="width:729px;" title="">
+        <p><a class="button-blue button  close" href="#">Nazaj</a></p>
+    </div>
+</div>
+
+      
+      <div id="teacher-frame" title="Za učitelja"></div>
+      <div id="notes-frame" title="Zapiski"><textarea></textarea></div>
+      
+      <div id="toolbox-left">
+        <ul id="toc-button" class="toolbox-decoration">
+          <li><a href="#kazalo"><span>Kazalo</span></a></li>
+        </ul>
+        <div id="toc-panel" class="tool-panel">
+          <ul>
+    <li><a class="star goToSlide" href="#_slide_1589085098">Naloga: Prebivalstvo</a></li>
+    <li><a class="star goToSlide" href="#_slide_1033465650">Naloga: Listi</a></li>
+    <li><a class="star goToSlide" href="#_slide_1802055612">Naloga: Sladoled</a></li>
+    <li><a class="star goToSlide" href="#_slide_1916001088">Naloga: Honorar</a></li>
+    <li><a class="star goToSlide" href="#_slide_1483962152">Naloga: Ocene</a></li>
+    <li><a class="star goToSlide" href="#_slide_1884105614">Naloga: Kolokviji</a></li>
+    <li><a class="star goToSlide" href="#_slide_1821082076">Naloga: Temperature</a></li>
+</ul>
+
+        </div>
+        <div id="toolbox-arrow-left" style="display: block;">
+          <p><a href="#nazaj"><span>Nazaj</span></a></p>
+        </div>
+      </div>
+  
+      <div id="toolbox-right">
+        <div id="toolbox-close" style="display: none;">
+          <a href="#zapri"><span>Zapri</span></a>
+        </div>
+        
+        <ul id="toolbox-icons" class="toolbox-decoration">
+          <li id="icons-help"><a href="#pomoc" title="Pomoč"><span>Pomoč</span></a></li>
+          <li id="icons-comments"><a href="#komentar" title="Komentar"><span>Komentarji</span></a></li>
+          <li id="icons-size"><a href="#velikost_crk" title="Velikost črk"><span>Velikost črk</span></a></li>
+          <li id="icons-document"><a href="#dokumenti" title="Zapiski"><span>Zapiski</span></a></li>
+          <li id="icons-teacher" style="display: none;"><a id="tools-za-ucitelja" href="#ucitelj" title="Za učitelja"><span>Za učitelja</span></a></li>
+          <li id="icons-print"><a href="#print_pres" title="Natisni"><span>Natisni</span></a></li>
+        </ul>
+        <ul id="print-panel" class="toolbox-decoration">
+          <li id="icons-single-page"><a href="#print_single_page" title="Natisni trenutno prosojnico"><span>Natisni trenutno prosojnico</span></a></li>
+          <li id="icons-multiple-pages"><a href="#print_multiple_pages" title="Natisni celotno gradivo"><span>Natisni celotno gradivo</span></a></li>
+        </ul>
+        <div style="clear:both;"></div>
+                
+        <div id="toolbox-arrow-right">
+          <p><a href="#naprej"><span>Naprej</span></a></p>
+        </div>
+        
+        <div id="toolbox-scale">
+          <div id="toolbox-scale-gauge"><img src="Prebivlastvo_files/lokator-20.png" alt="0%"></div>
+          <div id="toolbox-scale-number">22%</div>
+        </div>
+      </div>  
+    </div>
+    
+  <!-- Do not remove div#mask, because you'll need it to fill the whole screen -->    
+  <div id="mask"></div>
+
+
+</body></html>
