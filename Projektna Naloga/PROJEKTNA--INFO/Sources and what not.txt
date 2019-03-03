@@ -1,0 +1,22 @@
+-------------------SOURCES
+https://web.math.pmf.unizg.hr/~duje/kript/osnovni.html
+http://www.lait.fe.uni-lj.si/Seminarji/b_pogacnik.pdf
+https://ucilnica.fri.uni-lj.si/pluginfile.php/32408/mod_resource/content/0/drugi_del.pdf
+https://en.wikipedia.org/wiki/Cryptography
+http://www.bic-lj.si/vss/images/Diploma/Primer_diplome_za_studente.pdf
+https://www.youtube.com/watch?v=AQDCe585Lnc
+https://en.wikipedia.org/wiki/Public-key_cryptography
+
+https://arxiv.org/ftp/arxiv/papers/1405/1405.0398.pdf
+
+
+
+
+-------------------UVOD
+
+ si olajšujemo vsakodnevno življenj, saj ga srečujemo na pri 
+v današnji dobi računalnikov  je svet poln kibernetskega vojskovanja in se tudi nenehno razvija. Zato je danes še kako pomembna moderna kriptografija s katero se lahko varujemo proti mnogimi težavami. To so razlogi zakaj sem si izbral temo moderne kriptografije. Moderna kriptografija je način zapisovanja podatkov, tako da jih lahko preberejo le določene osebe, ki imajo dovoljenje za to. Čeprav se mogoče ne zavedamo, je kriptografija vse okoli nas, v naših računalnikih, mobitelih, televizorjih, tablicah in vse pogosteje tudi v urah in drugih napravah, celo avtih in hladilnikih. 
+
+
+
+Ta princip se je hitro pokazal za nepraktičnega, zato ker če je nasprotnik dobil ta slovar, je z lahkoto ugotovil originalno sporočilo. Tak sistem imenujemo kriptosistem 
